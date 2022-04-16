@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+// import './components/Expectations'
+import Expectations from './components/Expectations';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="App p-2">
+      <header className="App-header p-4 rounded bg-teal-500 text-white shadow">
+        <h1 className='inline text-3xl font-bold mr-4'>middleground</h1>
+        <p className='inline'>settle budgets comfortably</p>
       </header>
+        <Expectations/>
     </div>
   );
 }
