@@ -1,5 +1,5 @@
 import React from 'react'
-import SetRange from './SetRange';
+import SetRange from './RangeForm';
 import {Ranges} from '../interfaces'
 
 export default function Expectations ({ ranges }:{ ranges:Ranges}) {

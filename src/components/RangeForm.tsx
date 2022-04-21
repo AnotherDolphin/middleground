@@ -1,4 +1,5 @@
 import React from "react";
+import { db, doc, getDoc } from "../firebase";
 
 type propTypes = {
   disabled: boolean;
@@ -6,16 +7,22 @@ type propTypes = {
   max?: number;
 };
 
-export default function SetRange({ min, max, disabled }: propTypes) {
+export default function RangeForm({ min, max, disabled }: propTypes) {
+
+  const docRef = doc(db, "/testing/user0/projects", "testing");
+  const submitRange = () => console.log(3);
+  
+
   return (
-    <div className="inline-flex gap-4">
+    <form className="inline-flex gap-4 items-end">
       <div>
         <label htmlFor="low">minimum</label>
         <br />
         $
         <input
+          required
           disabled={disabled}
-          value={min ?? ""}
+          defaultValue={min ?? ""}
           className="w-32"
           type="text"
           id="low"
@@ -27,14 +34,19 @@ export default function SetRange({ min, max, disabled }: propTypes) {
         <br />
         $
         <input
+          required
           disabled={disabled}
-          value={max ?? ""}
+          defaultValue={max ?? ""}
           className="w-32"
           type="number"
           id="high"
           name="high"
         />
       </div>
-    </div>
+      <button className="rounded-md bg-green-600 px-4 py-2 text-white shadow-lg"
+      onClick={() => submitRange()}>
+        Submit
+      </button>
+    </form>
   );
 }
