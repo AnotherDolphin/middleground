@@ -1,26 +1,25 @@
-import React from 'react'
-import SetRange from './RangeForm'
+import React, { useContext } from 'react'
+import RangeForm from './RangeForm'
 import Status from './Status'
-import { Ranges } from '../interfaces'
+import { Ranges, Done } from '../utils'
+import { statusContext } from '../context'
 
 export default function Expectations({ ranges }: { ranges: Ranges }) {
-  const inputDone = ranges.yourMax != undefined && ranges.yourMax != -1
-  const theirRangeDone = ranges.theirMax != undefined && ranges.theirMax != -1  
+
+  const { status, setStatus} = useContext(statusContext)
+  const inputDone = [Done.onlyYou, Done.both].includes(status)  
 
   return (
     <div
-      className={
-        'expectations ' + (inputDone && theirRangeDone ? 'collapsed' : '')
-      }
+      className={'stage ' + (status >= Done.both ? 'collapsed' : '')}
     >
       <h2 className="bg-green-500 text-white p-3 text-xl">Expectations</h2>
       <div className="grid grid-cols-2 p-4 gap-x-6 gap-y-4">
-        <SetRange
-          disabled={inputDone}
-          min={inputDone ? ranges.yourMin : undefined}
-          max={inputDone ? ranges.yourMax : undefined}
+        <RangeForm
+          min={ranges.yourMin}
+          max={ranges.yourMax}
         />
-        <Status theirRangeDone={theirRangeDone} inputDone={inputDone} />
+        <Status theirRangeDone={status >= Done.onlyThem} inputDone={inputDone} />
       </div>
     </div>
   )

@@ -1,16 +1,19 @@
 import React, { FormEvent, useContext } from 'react'
 import { setDoc } from 'firebase/firestore'
-import { Doc, isInvited } from '../App'
-import { Ranges } from '../interfaces'
+import { isInvited } from '../App'
+import { Ranges, Done } from '../utils'
+import { statusContext, docContext } from '../context'
 
 type propTypes = {
-  disabled: boolean
   min?: number
   max?: number
 }
 
-export default function RangeForm({ min, max, disabled }: propTypes) {
-  const docRef = useContext(Doc)
+export default function RangeForm({ min, max }: propTypes) {
+  const docRef = useContext(docContext)
+  const { status } = useContext(statusContext)
+  const disabled = [Done.onlyYou, Done.both].includes(status)
+  // const disabled = min && min > -1 ? true : false
 
   const submitRange = async (e: FormEvent) => {
     e.preventDefault()

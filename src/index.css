@@ -18,12 +18,12 @@ code {
     monospace;
 }
 
-.expectations {
+.stage {
   @apply mx-[15%] my-4 overflow-hidden transition-all shadow-md rounded-xl bg-[#faffff];
   max-height: 300px;
   transition: 0.5s;
 }
 
-.expectations.collapsed {
+.stage.collapsed {
   max-height: 52px;
 }
