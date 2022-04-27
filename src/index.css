@@ -19,7 +19,7 @@ code {
 }
 
 .stage {
-  @apply mx-[15%] my-4 overflow-hidden transition-all shadow-md rounded-xl bg-[#faffff];
+  @apply mx-[15%] my-8 overflow-hidden transition-all shadow-md rounded-xl bg-[#faffff];
   max-height: 300px;
   transition: 0.5s;
 }

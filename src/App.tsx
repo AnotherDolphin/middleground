@@ -41,7 +41,7 @@ function App() {
         <docContext.Provider value={docRef}>
           <statusContext.Provider value={{ status, setStatus }}>
             <Expectations ranges={ranges} />
-            <Outcome />
+            <Outcome ranges={ranges} />
           </statusContext.Provider>
         </docContext.Provider>
       ) : (
