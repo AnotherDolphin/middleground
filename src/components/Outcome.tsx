@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { statusContext } from '../context'
-import { Done, Ranges } from '../utils'
+import { Done, ProjectData } from '../interfaces'
 import OutcomeStatement from './OutcomeStatement'
 
-export default function Outcome({ ranges }: { ranges: Ranges }) {
+export default function Outcome({ ranges }: { ranges: ProjectData }) {
   const { status } = useContext(statusContext)
 
   const decimal = (n: number) => {
@@ -14,15 +14,15 @@ export default function Outcome({ ranges }: { ranges: Ranges }) {
   const theyLow = ranges.theirMax == max
 
   return (
-    <div className={'stage ' + (status < Done.both ? 'collapsed' : '')}>
-      <h2 className='bg-violet-600 text-white p-3 text-xl'>Outcome</h2>
+    <div className={'stage ' + (status < Done.bothSetRange ? 'collapsed' : '')}>
+      <h2 className='bg-green-600 text-white p-3 text-xl'>Outcome</h2>
       <div className='grid grid-cols-4 p-4 gap-x-6 gap-y-4'>
         <div className='flex flex-col text-center m-4'>
           <h3 className='bg-bluegray text-white rounded-t-lg p-2'>
             Your range
           </h3>
           <p className='border-2 border-gray-300 rounded-b-lg text-xl p-2'>
-            ${decimal(ranges.yourMin)} to ${decimal(ranges.yourMax)}
+            ${decimal(ranges.yourMin)} <br/> to <br/> ${decimal(ranges.yourMax)}
           </p>
         </div>
         <div className='flex flex-col text-center m-4'>
@@ -30,7 +30,7 @@ export default function Outcome({ ranges }: { ranges: Ranges }) {
             Peer's range
           </h3>
           <p className='border-2 border-gray-300 rounded-b-lg text-xl p-2'>
-            ${decimal(ranges.theirMin)} to ${decimal(ranges.theirMax)}
+            ${decimal(ranges.theirMin)} <br/> to <br/> ${decimal(ranges.theirMax)}
           </p>
         </div>
         <OutcomeStatement {...{min, max, theyLow}}/>

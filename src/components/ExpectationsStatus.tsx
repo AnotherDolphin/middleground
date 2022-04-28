@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Status({
+export default function ExpectationsStatus({
   inputDone,
   theirRangeDone,
 }: {
@@ -27,7 +27,7 @@ export default function Status({
         {theirRangeDone ? done() : awaiting()}
       </div>
       <p className="col-span-2 text-sm text-gray-900 self-end">
-        expectaions will be revelaed after both parties set their ranges.{' '}
+        expectations will be revealed once both parties have set their ranges{' '}
       </p>
     </div>
   )

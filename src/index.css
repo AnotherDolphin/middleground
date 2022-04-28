@@ -27,3 +27,11 @@ code {
 .stage.collapsed {
   max-height: 52px;
 }
+
+button:not(:disabled) {
+  @apply transition-all hover:scale-110
+}
+
+button:disabled {
+  @apply bg-gray-400
+}

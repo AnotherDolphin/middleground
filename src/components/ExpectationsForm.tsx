@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { setDoc } from 'firebase/firestore'
 import { isInvited } from '../App'
-import { Ranges, Done } from '../utils'
+import { ProjectData, Done } from '../interfaces'
 import { statusContext, docContext } from '../context'
 
 type propTypes = {
@@ -18,7 +18,7 @@ type propTypes = {
 export default function ExpectationsForm({ min, max }: propTypes) {
   const docRef = useContext(docContext)
   const { status } = useContext(statusContext)
-  const disabled = [Done.onlyYou, Done.both].includes(status)
+  const disabled = [Done.youSetRange, Done.bothSetRange].includes(status)
   const [inputValues, setInputValues] = useState({ min: min, max: max })
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function ExpectationsForm({ min, max }: propTypes) {
   const submitRange = async (e: FormEvent) => {
     e.preventDefault()
     const data = new FormData(e.target as HTMLFormElement)
-    const updates = {} as Ranges
+    const updates = {} as ProjectData
     if (isInvited) {
       updates.theirMax = data.get('max')! as unknown as number
       updates.theirMin = data.get('min')! as unknown as number
@@ -49,7 +49,7 @@ export default function ExpectationsForm({ min, max }: propTypes) {
       onSubmit={submitRange}
     >
       <p className='col-span-2 text-gray-900'>
-        Set your expectation with an your project budget range.
+        Set your expected budget range for the project
       </p>
       <div>
         <label className='text-gray-500' htmlFor='low'>
@@ -88,9 +88,7 @@ export default function ExpectationsForm({ min, max }: propTypes) {
       <button
         disabled={disabled}
         className={
-          'rounded-xl bg-green-500 px-4 py-2 text-white shadow-lg col-span-2 justify-self-center ' +
-          (disabled && 'bg-gray-400')
-        }
+          'rounded-xl bg-green-500 px-4 py-2 text-white shadow-lg col-span-2 justify-self-center '        }
       >
         Submit
       </button>

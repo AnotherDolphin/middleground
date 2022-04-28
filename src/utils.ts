@@ -1,22 +1,15 @@
-export interface Ranges {
-    yourMin: number,
-    yourMax: number,
-    theirMin: number,
-    theirMax: number
-  }
+import { Done, ProjectData } from "./interfaces"
 
-export enum Done {
-  neither = 0,
-  onlyYou,
-  onlyThem,
-  both
-}
-
-export const checkStatus = (ranges: Ranges) : number => {
-  const you = ranges?.yourMax != undefined && ranges.yourMax != -1
-  const them = ranges?.theirMax != undefined && ranges.theirMax != -1
-  if(you && !them) return Done.onlyYou
-  if(!you && them) return Done.onlyThem
-  if(you && them) return Done.both
-  return Done.neither
+export const checkStatus = (prog: ProjectData) : number => {
+  const yourRange = prog?.yourMax != undefined && prog.yourMax != -1
+  const theirRange = prog?.theirMax != undefined && prog.theirMax != -1
+  if(yourRange && theirRange) return Done.bothSetRange
+  if(yourRange) return Done.youSetRange
+  if(theirRange) return Done.theySetRange
+  const youConfirmed = prog?.youConfirmed != undefined && prog.youConfirmed
+  const theyConfirmed = prog?.theyConfirmed != undefined && prog.theyConfirmed
+  if(youConfirmed && theyConfirmed) return Done.bothConfirmed
+  if(youConfirmed) return Done.youConfirmed
+  if(theyConfirmed) return Done.theyConfirmed
+  return Done.staging
 }
